@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T2 Bares & Produções — Bar profissional para eventos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================
+       RESET & TOKENS
+    ========================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #14101E;
+      --accent: #FE412E;
+      --grad:   linear-gradient(135deg, #FE412E 0%, #DD2D63 52%, #EE974A 100%);
+      --text:   #FFFFFF;
+      --muted:  #CDCBCF;
+      --border: rgba(255,255,255,.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .grad-text {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* =========================================
+       BUTTONS
+    ========================================= */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: var(--grad);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { opacity: .85; transform: translateY(-2px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      border: 1.5px solid rgba(255,255,255,.22);
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color .2s, border-color .2s, transform .2s;
+      white-space: nowrap;
+    }
+    .btn-outline:hover { color: #fff; border-color: rgba(255,255,255,.55); transform: translateY(-2px); }
+
+    /* =========================================
+       NAV
+    ========================================= */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      padding: 22px 0;
+      transition: background .3s, padding .3s, border-bottom .3s;
+    }
+    #nav.scrolled {
+      background: rgba(20,16,30,.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -.5px;
+    }
+    .nav-logo span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* =========================================
+       HERO
+    ========================================= */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('Capa-Banner Hero T2/capa.jpg.jpeg') center / cover no-repeat;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%,
+        rgba(20,16,30,.35) 0%,
+        rgba(20,16,30,.88) 68%,
+        rgba(20,16,30,.98) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 840px;
+      padding: 140px 28px 100px;
+    }
+    .hero-pre {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 8px 20px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    .hero-h1 {
+      font-weight: 900;
+      font-size: clamp(38px, 5.8vw, 72px);
+      line-height: 1.07;
+      letter-spacing: -1.5px;
+      margin-bottom: 28px;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 1.9vw, 19px);
+      color: var(--muted);
+      line-height: 1.78;
+      max-width: 660px;
+      margin: 0 auto 48px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* =========================================
+       NÚMEROS
+    ========================================= */
+    #numeros {
+      padding: 88px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .numeros-anchor {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: .55;
+      margin-bottom: 52px;
+    }
+    .numeros-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .numero-card {
+      background: var(--bg);
+      padding: 52px 36px;
+      text-align: center;
+      position: relative;
+    }
+    .numero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 28px; right: 28px;
+      height: 2px;
+      background: var(--grad);
+    }
+    .numero-value {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(44px, 5vw, 66px);
+      line-height: 1;
+      margin-bottom: 16px;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .numero-label {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* =========================================
+       LOGOS
+    ========================================= */
+    #logos { padding: 68px 0; }
+    .logos-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: .5;
+      margin-bottom: 44px;
+    }
+    .logos-marquee {
+      position: relative;
+      overflow: hidden;
+    }
+    .logos-marquee::before,
+    .logos-marquee::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 150px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .logos-marquee::before { left: 0;  background: linear-gradient(to right, var(--bg), transparent); }
+    .logos-marquee::after  { right: 0; background: linear-gradient(to left,  var(--bg), transparent); }
+    .logos-track {
+      display: flex;
+      align-items: center;
+      gap: 72px;
+      animation: marqueeScroll 28s linear infinite;
+      width: max-content;
+    }
+    .logos-track img {
+      height: 38px;
+      width: auto;
+      opacity: .5;
+      filter: brightness(0) invert(1);
+      transition: opacity .3s;
+    }
+    .logos-track img:hover { opacity: 1; }
+    @keyframes marqueeScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* =========================================
+       SHARED SECTION HELPERS
+    ========================================= */
+    .section-eyebrow {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .section-h2 {
+      font-weight: 800;
+      font-size: clamp(28px, 3.8vw, 50px);
+      line-height: 1.13;
+      letter-spacing: -.5px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.78;
+      max-width: 600px;
+      margin-top: 20px;
+    }
+
+    /* =========================================
+       PROBLEMA
+    ========================================= */
+    #problema { padding: 108px 0; }
+    .problema-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 60px;
+    }
+    .pains-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .pain-row {
+      display: flex;
+      gap: 18px;
+      padding: 22px 24px;
+      background: rgba(254,65,46,.04);
+      border: 1px solid rgba(254,65,46,.16);
+      border-radius: 14px;
+      transition: border-color .25s, background .25s;
+    }
+    .pain-row:hover {
+      background: rgba(254,65,46,.07);
+      border-color: rgba(254,65,46,.4);
+    }
+    .pain-dot {
+      width: 7px;
+      height: 7px;
+      min-width: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 9px;
+    }
+    .pain-content strong {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+    .pain-content span {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .problema-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .problema-quote {
+      padding: 40px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: rgba(255,255,255,.02);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .problema-quote p {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .problema-quote .highlight {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 0;
+    }
+
+    /* =========================================
+       PRODUTOS / TABS
+    ========================================= */
+    #produtos {
+      padding: 108px 0;
+      background: rgba(255,255,255,.02);
+    }
+    .produtos-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+    .produtos-header .section-sub { margin: 20px auto 0; }
+
+    .tabs-nav {
+      display: flex;
+      gap: 4px;
+      background: rgba(255,255,255,.04);
+      border-radius: 14px;
+      padding: 4px;
+      margin-bottom: 44px;
+      overflow-x: auto;
+    }
+    .tabs-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex: 1;
+      min-width: 110px;
+      padding: 13px 18px;
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: all .25s;
+      white-space: nowrap;
+    }
+    .tab-btn.active {
+      background: var(--grad);
+      color: #fff;
+    }
+    .tab-btn:hover:not(.active) {
+      color: #fff;
+      background: rgba(255,255,255,.07);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      animation: tabIn .3s ease;
+    }
+    @keyframes tabIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .tab-text .tab-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: .6;
+      display: block;
+      margin-bottom: 16px;
+    }
+    .tab-text .tab-h3 {
+      font-weight: 800;
+      font-size: clamp(22px, 2.8vw, 34px);
+      line-height: 1.2;
+      letter-spacing: -.3px;
+      margin-bottom: 22px;
+    }
+    .tab-text .tab-body {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.82;
+      margin-bottom: 30px;
+    }
+    .tab-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 38px;
+    }
+    .tab-bullets li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .tab-bullets li::before {
+      content: '';
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      background: var(--grad);
+      border-radius: 50%;
+      margin-top: 1px;
+    }
+
+    .tab-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tab-visual img {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 18px;
+      box-shadow: 0 32px 80px rgba(0,0,0,.4);
+    }
+
+    /* =========================================
+       COMO FUNCIONA
+    ========================================= */
+    #como-funciona { padding: 108px 0; }
+    .funciona-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 88px;
+      align-items: start;
+      margin-top: 64px;
+    }
+    .funciona-img-wrap {
+      position: sticky;
+      top: 110px;
+    }
+    .funciona-img-wrap img {
+      width: 100%;
+      border-radius: 28px;
+      display: block;
+    }
+    .steps-list { display: flex; flex-direction: column; }
+    .step {
+      display: flex;
+      gap: 26px;
+      padding: 34px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:first-child { padding-top: 0; }
+    .step:last-child  { border-bottom: none; }
+    .step-num {
+      width: 52px;
+      min-width: 52px;
+      height: 52px;
+      background: var(--grad);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      color: #fff;
+    }
+    .step-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .step-desc {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    /* =========================================
+       CASES
+    ========================================= */
+    #cases {
+      padding: 108px 0;
+      background: rgba(255,255,255,.02);
+    }
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+    }
+    .case-card {
+      padding: 38px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(255,255,255,.02);
+      transition: border-color .25s, transform .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .case-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--grad);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+    .case-card:hover { border-color: rgba(254,65,46,.3); transform: translateY(-5px); }
+    .case-card:hover::after { transform: scaleX(1); }
+    .case-logo-wrap {
+      height: 48px;
+      margin-bottom: 26px;
+      display: flex;
+      align-items: center;
+    }
+    .case-logo-wrap img {
+      max-height: 48px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: .75;
+    }
+    .case-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+    .case-type {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .case-data { font-size: 14px; color: var(--muted); }
+
+    /* =========================================
+       SOCIAL PROOF (Red Bull / Jack Daniel's)
+    ========================================= */
+    #social-proof { padding: 108px 0; }
+    .proof-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-top: 64px;
+    }
+    .proof-card {
+      padding: 48px;
+      border-radius: 26px;
+      background: var(--grad);
+      position: relative;
+      overflow: hidden;
+    }
+    .proof-card::before {
+      content: '"';
+      position: absolute;
+      top: -16px; right: 28px;
+      font-size: 140px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      color: rgba(255,255,255,.1);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .proof-quote {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.72;
+      color: #fff;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .proof-logos {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .proof-logos img {
+      height: 30px;
+      filter: brightness(0) invert(1);
+      opacity: .9;
+    }
+    .proof-aside .proof-body {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.82;
+    }
+    .proof-aside .proof-body + .proof-body { margin-top: 24px; }
+    .proof-aside .btn-primary { margin-top: 36px; }
+
+    /* =========================================
+       CTA FINAL
+    ========================================= */
+    #cta-final {
+      padding: 128px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(254,65,46,.08) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .cta-h2 {
+      font-weight: 900;
+      font-size: clamp(32px, 4.8vw, 58px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      max-width: 760px;
+      margin: 0 auto 22px;
+    }
+    .cta-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 48px;
+      line-height: 1.78;
+    }
+    .cta-btns {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+    .wa-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .wa-link:hover { color: #fff; }
+    .security-note {
+      font-size: 13px;
+      color: rgba(205,203,207,.4);
+    }
+
+    /* =========================================
+       FOOTER
+    ========================================= */
+    footer {
+      background: rgba(0,0,0,.28);
+      border-top: 1px solid var(--border);
+      padding: 64px 0 38px;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+    .footer-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .footer-tagline { font-size: 14px; color: var(--muted); }
+    .footer-links {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 26px;
+      font-size: 13px;
+      color: rgba(205,203,207,.32);
+      text-align: center;
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+    @media (max-width: 900px) {
+      .tab-panel.active { grid-template-columns: 1fr; }
+      .tab-visual { display: none; }
+    }
+    @media (max-width: 768px) {
+      .numeros-grid   { grid-template-columns: 1fr; }
+      .problema-layout { grid-template-columns: 1fr; }
+      .funciona-layout { grid-template-columns: 1fr; }
+      .funciona-img-wrap { position: static; display: none; }
+      .cases-grid     { grid-template-columns: 1fr; }
+      .proof-layout   { grid-template-columns: 1fr; }
+      .footer-row     { flex-direction: column; }
+      .footer-links   { flex-direction: column; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">T<span>2</span> Bares</a>
+    <a href="#cta-final" class="btn-primary" style="padding:12px 26px;font-size:14px;">Quero um orçamento</a>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-pre">Produção de bares para eventos desde 2014</span>
+    <h1 class="hero-h1">
+      Bar amador não é o que destrói<br>
+      <span class="grad-text">um bom evento.</span>
+    </h1>
+    <p class="hero-sub">
+      Empresa de bico some. Fornecedor genérico não tem dado. Quem não tem histórico, chuta.
+      A T2 está no mercado há 13 anos porque controla o que os outros deixam ao acaso —
+      do primeiro insumo ao relatório final de consumo.
+    </p>
+    <div class="hero-ctas">
+      <a href="#cta-final" class="btn-primary">Quero um orçamento</a>
+      <a href="#como-funciona" class="btn-outline">Ver como funciona ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NÚMEROS ===================== -->
+<section id="numeros">
+  <div class="container">
+    <p class="numeros-anchor">Enquanto empresas de bico somem a cada temporada, a T2 acumula:</p>
+    <div class="numeros-grid">
+      <div class="numero-card">
+        <div class="numero-value">+13 anos</div>
+        <p class="numero-label">de experiência no<br>mercado de eventos</p>
+      </div>
+      <div class="numero-card">
+        <div class="numero-value">+1.500</div>
+        <p class="numero-label">eventos executados<br>com suporte 360°</p>
+      </div>
+      <div class="numero-card">
+        <div class="numero-value">+30 mil</div>
+        <p class="numero-label">profissionais gerenciados em<br>operações por todo o estado</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LOGOS ===================== -->
+<section id="logos">
+  <div class="container">
+    <p class="logos-label">Quem não aceita amadorismo escolheu a T2:</p>
+  </div>
+  <div class="logos-marquee">
+    <div class="logos-track">
+      <img src="Logo T2/redbull.png"   alt="Red Bull">
+      <img src="Logo T2/jack-d.png"    alt="Jack Daniel's">
+      <img src="Logo T2/heineken.png"  alt="Heineken">
+      <img src="Logo T2/csk.png"       alt="CajuSemKopo">
+      <img src="Logo T2/jaguariuna.png" alt="Jaguariuna">
+      <img src="Logo T2/ticomia.png"   alt="Ticomia">
+      <img src="Logo T2/castelli.png"  alt="Castelli">
+      <!-- duplicate for seamless loop -->
+      <img src="Logo T2/redbull.png"   alt="Red Bull">
+      <img src="Logo T2/jack-d.png"    alt="Jack Daniel's">
+      <img src="Logo T2/heineken.png"  alt="Heineken">
+      <img src="Logo T2/csk.png"       alt="CajuSemKopo">
+      <img src="Logo T2/jaguariuna.png" alt="Jaguariuna">
+      <img src="Logo T2/ticomia.png"   alt="Ticomia">
+      <img src="Logo T2/castelli.png"  alt="Castelli">
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROBLEMA ===================== -->
+<section id="problema">
+  <div class="container">
+    <span class="section-eyebrow">O custo do amadorismo</span>
+    <h2 class="section-h2">Você já viu o que um bar mal gerenciado<br>faz com um evento bem produzido?</h2>
+    <div class="problema-layout">
+      <div class="pains-list">
+        <div class="pain-row">
+          <div class="pain-dot"></div>
+          <div class="pain-content">
+            <strong>Fila longa no bar.</strong>
+            <span>A culpa cai no evento inteiro.</span>
+          </div>
+        </div>
+        <div class="pain-row">
+          <div class="pain-dot"></div>
+          <div class="pain-content">
+            <strong>Desvio de estoque.</strong>
+            <span>Você descobre só no acerto final.</span>
+          </div>
+        </div>
+        <div class="pain-row">
+          <div class="pain-dot"></div>
+          <div class="pain-content">
+            <strong>Staff que some no dia.</strong>
+            <span>Você cobre no improviso.</span>
+          </div>
+        </div>
+        <div class="pain-row">
+          <div class="pain-dot"></div>
+          <div class="pain-content">
+            <strong>Fornecedor sem dado.</strong>
+            <span>Ele chuta. Você paga o erro.</span>
+          </div>
+        </div>
+      </div>
+      <div class="problema-aside">
+        <div class="problema-quote">
+          <p>Não é azar. É o preço do amadorismo.</p>
+          <p class="highlight">E você não construiu um bom evento para pagar esse preço.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRODUTOS / SOLUÇÃO ===================== -->
+<section id="produtos">
+  <div class="container">
+    <div class="produtos-header">
+      <span class="section-eyebrow">Solução</span>
+      <h2 class="section-h2">Chega de torcer para o bar dar certo.</h2>
+      <p class="section-sub">
+        Empresa de bico não tem histórico. Fornecedor genérico não tem dado.
+        A T2 tem os dois — e adapta a operação ao perfil exato do seu evento.
+      </p>
+    </div>
+
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="uni">T2 UNI</button>
+      <button class="tab-btn" data-tab="corp">T2 CORP</button>
+      <button class="tab-btn" data-tab="festival">T2 FESTIVAL</button>
+      <button class="tab-btn" data-tab="ativa">T2 ATIVA</button>
+    </div>
+
+    <!-- T2 UNI -->
+    <div class="tab-panel active" id="tab-uni">
+      <div class="tab-text">
+        <span class="tab-eyebrow">Para atléticas universitárias</span>
+        <h3 class="tab-h3">Atlética boa tem bar que funciona. Não um bar que se vira.</h3>
+        <p class="tab-body">
+          Alto volume, público intenso, margem curta para erro. Empresa de bico não sobrevive a esse cenário.
+          A T2 entra com equipe dimensionada para o pico de consumo, quantificação baseada em histórico real
+          e staff que não desaparece no dia.<br><br>
+          <strong>A galera bebe. Você não apaga incêndio.</strong>
+        </p>
+        <ul class="tab-bullets">
+          <li>1 profissional para cada 70 convidados em open bar</li>
+          <li>Quantificação baseada em 13 anos de dados de eventos similares</li>
+          <li>Comunidades locais ativas: staff confirmado, sem surpresa no dia</li>
+        </ul>
+        <a href="#cta-final" class="btn-primary">Solicitar orçamento para meu evento universitário →</a>
+      </div>
+      <div class="tab-visual">
+        <img src="Elementos T2/Componente-produtos.png" alt="T2 Produtos">
+      </div>
+    </div>
+
+    <!-- T2 CORP -->
+    <div class="tab-panel" id="tab-corp">
+      <div class="tab-text">
+        <span class="tab-eyebrow">Para empresas e agências de live marketing</span>
+        <h3 class="tab-h3">Sua marca não pode ser representada por quem improvisa.</h3>
+        <p class="tab-body">
+          Evento corporativo exige postura, alinhamento e zero improviso. Fornecedor genérico não entende
+          isso — entrega operação, não experiência. A T2 seleciona e treina profissionais para que cada
+          drink servido reforce a identidade da marca, não comprometa ela.<br><br>
+          <strong>Red Bull e Jack Daniel's já fizeram essa escolha.</strong>
+        </p>
+        <ul class="tab-bullets">
+          <li>Curadoria técnica e comportamental do staff por perfil de marca</li>
+          <li>Hierarquia clara: coordenador → barman → apoio</li>
+          <li>Relatório detalhado de consumo pós-evento para auditoria interna</li>
+        </ul>
+        <a href="#cta-final" class="btn-primary">Solicitar orçamento para meu evento corporativo →</a>
+      </div>
+      <div class="tab-visual">
+        <img src="Elementos T2/Componente-produtos.png" alt="T2 Produtos">
+      </div>
+    </div>
+
+    <!-- T2 FESTIVAL -->
+    <div class="tab-panel" id="tab-festival">
+      <div class="tab-text">
+        <span class="tab-eyebrow">Para produtoras e festivais de grande porte</span>
+        <h3 class="tab-h3">Festival de múltiplos dias não perdoa quem não tem histórico.</h3>
+        <p class="tab-body">
+          Uma falha no bar em escala de festival não é um problema operacional — é um problema de imagem,
+          de receita e da próxima edição. Quem não tem dado, chuta. A T2 tem 13 anos de histórico de consumo
+          para dimensionar cada detalhe antes de o primeiro convidado entrar.<br><br>
+          <strong>Você escala o festival. Nós escalamos junto — sem achismo.</strong>
+        </p>
+        <ul class="tab-bullets">
+          <li>Precisão absoluta na quantificação: sem falta, sem desperdício</li>
+          <li>Seleção de fornecedores estratégicos por perfil e logística</li>
+          <li>Desmontagem organizada + relatório de consumo item a item</li>
+        </ul>
+        <a href="#cta-final" class="btn-primary">Solicitar orçamento para meu festival →</a>
+      </div>
+      <div class="tab-visual">
+        <img src="Elementos T2/Componente-produtos.png" alt="T2 Produtos">
+      </div>
+    </div>
+
+    <!-- T2 ATIVA -->
+    <div class="tab-panel" id="tab-ativa">
+      <div class="tab-text">
+        <span class="tab-eyebrow">Para marcas e agências de live marketing</span>
+        <h3 class="tab-h3">Presença de marca no evento não é banner. É experiência — ou não é nada.</h3>
+        <p class="tab-body">
+          Muita marca aparece no evento. Poucas são lembradas depois. A T2 Ativa entrega conexão —
+          com staff selecionado por perfil de marca, treinado para personificar o que ela representa
+          e capaz de transformar cada interação num momento que fica.<br><br>
+          <strong>Fizemos isso com Red Bull. Fizemos com Jack Daniel's.</strong>
+        </p>
+        <ul class="tab-bullets">
+          <li>Curadoria comportamental do staff por fit com os valores da marca</li>
+          <li>Briefing de imersão: cada profissional conhece a marca antes de entrar no evento</li>
+          <li>Relatório de ativação pós-evento com dados de interação e alcance</li>
+        </ul>
+        <a href="#cta-final" class="btn-primary">Solicitar orçamento para minha ativação →</a>
+      </div>
+      <div class="tab-visual">
+        <img src="Elementos T2/Componente-produtos.png" alt="T2 Produtos">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== COMO FUNCIONA ===================== -->
+<section id="como-funciona">
+  <div class="container">
+    <span class="section-eyebrow">Processo</span>
+    <h2 class="section-h2">13 anos nos ensinaram que improviso tem custo.<br>Por isso não usamos.</h2>
+    <p class="section-sub">
+      Nossa operação tem etapas porque cada detalhe sem dono vira problema seu.
+      Aqui, cada detalhe tem dono.
+    </p>
+    <div class="funciona-layout">
+      <div class="funciona-img-wrap">
+        <img src="Elementos T2/elementobanner.png" alt="T2 Bares — operação em evento">
+      </div>
+      <div class="steps-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h4 class="step-title">Quantificação & Fornecedores</h4>
+            <p class="step-desc">Com base em 13 anos de histórico, calculamos com precisão o volume de insumos necessários e selecionamos fornecedores alinhados ao perfil do projeto. Sem chute. Sem desperdício.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h4 class="step-title">Recebimento & Gestão da Equipe</h4>
+            <p class="step-desc">Gerenciamos o projeto de ponta a ponta: recebimento técnico de produtos, auditoria de insumos e ativação das comunidades locais para garantir presença confirmada de staff em todo o estado.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h4 class="step-title">Montagem & Execução</h4>
+            <p class="step-desc">Hierarquia clara, comunicação assertiva. De coordenadores a barmans, cada setor é desenhado para converter fluxo intenso em atendimento impecável — rápido, fluido e sem gargalo.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div>
+            <h4 class="step-title">Desmontagem & Relatório de Consumo</h4>
+            <p class="step-desc">Encerramos com a mesma organização que abrimos. Auditoria item a item e relatório final de consumo: transparência total para o contratante fechar as contas sem dor de cabeça.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CASES ===================== -->
+<section id="cases">
+  <div class="container">
+    <span class="section-eyebrow">Cases de Sucesso</span>
+    <h2 class="section-h2">Esses eventos não aceitavam amadorismo.<br>Escolheram a T2.</h2>
+    <p class="section-sub">
+      Em um mercado onde empresas somem a cada temporada, esses nomes voltaram — e indicaram.
+    </p>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-logo-wrap">
+          <img src="Logo T2/jaguariuna.png" alt="Festival da Lua Cheia">
+        </div>
+        <div class="case-name">Festival da Lua Cheia</div>
+        <div class="case-type">Festival</div>
+        <div class="case-data">Múltiplos dias de operação · Grande porte</div>
+      </div>
+      <div class="case-card">
+        <div class="case-logo-wrap">
+          <img src="Logo T2/csk.png" alt="CajuSemKopo">
+        </div>
+        <div class="case-name">CajuSemKopo</div>
+        <div class="case-type">Festival</div>
+        <div class="case-data">Open bar · Alto volume de atendimento</div>
+      </div>
+      <div class="case-card">
+        <div class="case-logo-wrap">
+          <img src="Logo T2/ticomia.png" alt="Sparta Winter Edition">
+        </div>
+        <div class="case-name">Sparta Winter Edition</div>
+        <div class="case-type">Evento Universitário</div>
+        <div class="case-data">Open bar universitário · Suporte 360°</div>
+      </div>
+      <div class="case-card">
+        <div class="case-logo-wrap">
+          <img src="Logo T2/castelli.png" alt="Bloco California">
+        </div>
+        <div class="case-name">Bloco California</div>
+        <div class="case-type">Evento de Rua</div>
+        <div class="case-data">Operação de rua · Staff confirmado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SOCIAL PROOF ===================== -->
+<section id="social-proof">
+  <div class="container">
+    <span class="section-eyebrow">Marcas que escolheram a T2</span>
+    <h2 class="section-h2">Red Bull e Jack Daniel's não trabalham<br>com quem improvisa.</h2>
+    <div class="proof-layout">
+      <div class="proof-card">
+        <p class="proof-quote">
+          Para essas marcas, o bartender não serve bebida — ele serve a marca.
+          Por isso a T2 vai além da operação logística: fazemos curadoria técnica e comportamental
+          para selecionar profissionais que personificam o que cada parceiro representa.
+        </p>
+        <div class="proof-logos">
+          <img src="Logo T2/redbull.png"  alt="Red Bull">
+          <img src="Logo T2/jack-d.png"   alt="Jack Daniel's">
+          <img src="Logo T2/heineken.png" alt="Heineken">
+        </div>
+      </div>
+      <div class="proof-aside">
+        <p class="proof-body">Empresa de bico não chega perto desse padrão. A T2 foi escolhida porque a diferença aparece no detalhe.</p>
+        <p class="proof-body">13 anos de histórico operacional transformados em precisão — na quantificação, no staff, na entrega. Cada evento executado vira dado para o próximo ser ainda melhor.</p>
+        <a href="#cta-final" class="btn-primary">Fale com a T2 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA FINAL ===================== -->
+<section id="cta-final">
+  <div class="container">
+    <h2 class="cta-h2">
+      Seu evento é bom demais para ser destruído<br>
+      <span class="grad-text">por um bar amador.</span>
+    </h2>
+    <p class="cta-sub">
+      Conta pra gente o que você está produzindo.
+      A T2 cuida do resto — com histórico, com dados e com compromisso até o fim.
+    </p>
+    <div class="cta-btns">
+      <a href="mailto:contato@t2bares.com.br" class="btn-primary">Quero um orçamento</a>
+      <a href="https://wa.me/5500000000000" class="wa-link" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Prefiro falar pelo WhatsApp →
+      </a>
+    </div>
+    <p class="security-note">Sem compromisso. Resposta em até 24h.</p>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <div>
+        <div class="footer-logo">T2 Bares &amp; Produções</div>
+        <div class="footer-tagline">A arte de celebrar o hoje.</div>
+      </div>
+      <div class="footer-links">
+        <a href="https://instagram.com/t2bares" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @t2bares
+        </a>
+        <a href="https://wa.me/5500000000000" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="mailto:contato@t2bares.com.br">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          E-mail
+        </a>
+        <a href="https://t2bares.com.br" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          t2bares.com.br
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2024 T2 Bares &amp; Produções. Todos os direitos reservados.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + target).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
