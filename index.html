@@ -184,7 +184,7 @@
     }
     .hero-ctas {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
     }
@@ -248,50 +248,96 @@
     /* =========================================
        LOGOS
     ========================================= */
-    #logos { padding: 68px 0; }
-    .logos-label {
-      text-align: center;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+    #logos { padding: 100px 0; background: var(--bg); }
+    .logos-header { text-align: center; margin-bottom: 64px; }
+    .logos-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(22px, 3.5vw, 38px);
+      color: var(--text);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .logos-title span {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logos-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
       color: var(--muted);
-      opacity: .5;
-      margin-bottom: 44px;
+      opacity: 0.75;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
     }
-    .logos-marquee {
-      position: relative;
-      overflow: hidden;
+    .logos-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 64px;
     }
-    .logos-marquee::before,
-    .logos-marquee::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 150px;
-      z-index: 2;
-      pointer-events: none;
+    .logos-row {
+      display: flex;
+      justify-content: center;
+      border-top: 1px solid var(--border);
     }
-    .logos-marquee::before { left: 0;  background: linear-gradient(to right, var(--bg), transparent); }
-    .logos-marquee::after  { right: 0; background: linear-gradient(to left,  var(--bg), transparent); }
-    .logos-track {
+    .logos-row:last-child { border-bottom: 1px solid var(--border); }
+    .logos-cell {
+      flex: 0 0 calc(100% / 4);
+      max-width: calc(100% / 4);
       display: flex;
       align-items: center;
-      gap: 72px;
-      animation: marqueeScroll 28s linear infinite;
-      width: max-content;
+      justify-content: center;
+      padding: 40px 32px;
+      border-right: 1px solid var(--border);
+      transition: border-color .3s;
     }
-    .logos-track img {
-      height: 38px;
+    .logos-cell:first-child { border-left: 1px solid var(--border); }
+    .logos-row--three .logos-cell {
+      flex: 0 0 calc(100% / 3);
+      max-width: calc(100% / 3);
+    }
+    .logos-cell img {
+      height: 48px;
       width: auto;
-      opacity: .5;
-      filter: brightness(0) invert(1);
+      max-width: 140px;
+      object-fit: contain;
+      filter: brightness(0);
+      opacity: 0.45;
       transition: opacity .3s;
     }
-    .logos-track img:hover { opacity: 1; }
-    @keyframes marqueeScroll {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    .logos-cell:hover { border-color: rgba(0,0,0,.18); }
+    .logos-cell:hover img { opacity: 0.85; }
+    .logos-cta { text-align: center; }
+    .logos-cta-btn {
+      display: inline-block;
+      background: var(--grad);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 48px;
+      border-radius: 4px;
+      transition: opacity .3s, transform .2s;
+    }
+    .logos-cta-btn:hover { opacity: .88; transform: translateY(-2px); }
+    @media (max-width: 768px) {
+      #logos { padding: 72px 0; }
+      .logos-header { margin-bottom: 48px; }
+      .logos-cell,
+      .logos-row--three .logos-cell { flex: 0 0 50%; max-width: 50%; padding: 28px 20px; }
+      .logos-cell img { height: 36px; max-width: 110px; }
+      .logos-cta-btn { padding: 16px 36px; font-size: 14px; }
+    }
+    @media (max-width: 480px) {
+      .logos-cell img { height: 30px; max-width: 90px; }
     }
 
     /* =========================================
@@ -378,7 +424,7 @@
       padding: 40px;
       border: 1px solid var(--border);
       border-radius: 24px;
-      background: rgba(255,255,255,.02);
+      background: rgba(0,0,0,.03);
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -402,50 +448,56 @@
     /* =========================================
        PRODUTOS / TABS
     ========================================= */
-    #produtos {
-      padding: 108px 0;
-      background: rgba(255,255,255,.02);
-    }
-    .produtos-header {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 60px;
-    }
+    #produtos { padding: 108px 0; background: rgba(0,0,0,.03); }
+    .produtos-header { text-align: center; max-width: 720px; margin: 0 auto 56px; }
     .produtos-header .section-sub { margin: 20px auto 0; }
 
     .tabs-nav {
       display: flex;
-      gap: 4px;
+      gap: 6px;
       background: rgba(255,255,255,.04);
-      border-radius: 14px;
-      padding: 4px;
-      margin-bottom: 44px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 5px;
+      margin-bottom: 52px;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
     .tabs-nav::-webkit-scrollbar { display: none; }
     .tab-btn {
       flex: 1;
-      min-width: 110px;
-      padding: 13px 18px;
+      min-width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 16px;
       background: transparent;
       border: none;
       color: var(--muted);
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 13px;
+      letter-spacing: .3px;
       cursor: pointer;
-      border-radius: 10px;
+      border-radius: 11px;
       transition: all .25s;
       white-space: nowrap;
+    }
+    .tab-btn .tab-icon {
+      width: 18px; height: 18px;
+      opacity: .45; flex-shrink: 0;
+      transition: opacity .25s;
     }
     .tab-btn.active {
       background: var(--grad);
       color: #fff;
+      box-shadow: 0 4px 18px rgba(254,65,46,.35);
     }
-    .tab-btn:hover:not(.active) {
-      color: #fff;
-      background: rgba(255,255,255,.07);
-    }
+    .tab-btn.active .tab-icon { opacity: 1; filter: brightness(0) invert(1); }
+    .tab-btn:hover:not(.active) { color: #fff; background: rgba(255,255,255,.07); }
+    .tab-btn:hover:not(.active) .tab-icon { opacity: .75; }
 
     .tab-panel { display: none; }
     .tab-panel.active {
@@ -453,59 +505,58 @@
       grid-template-columns: 1fr 1fr;
       gap: 64px;
       align-items: center;
-      animation: tabIn .3s ease;
+      animation: tabIn .35s ease;
     }
     @keyframes tabIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     .tab-text .tab-eyebrow {
-      font-size: 11px;
+      display: block;
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--muted);
-      opacity: .6;
-      display: block;
-      margin-bottom: 16px;
+      color: var(--accent);
+      opacity: .85;
+      margin-bottom: 14px;
     }
     .tab-text .tab-h3 {
       font-weight: 800;
-      font-size: clamp(22px, 2.8vw, 34px);
-      line-height: 1.2;
+      font-size: clamp(21px, 2.6vw, 32px);
+      line-height: 1.22;
       letter-spacing: -.3px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
     .tab-text .tab-body {
-      font-size: 16px;
+      font-size: 15.5px;
       color: var(--muted);
-      line-height: 1.82;
-      margin-bottom: 30px;
+      line-height: 1.84;
+      margin-bottom: 28px;
     }
     .tab-bullets {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      margin-bottom: 38px;
+      gap: 13px;
+      margin-bottom: 36px;
     }
     .tab-bullets li {
       display: flex;
-      gap: 14px;
+      gap: 13px;
       align-items: flex-start;
-      font-size: 15px;
+      font-size: 14.5px;
       color: var(--muted);
       line-height: 1.55;
     }
     .tab-bullets li::before {
       content: '';
-      width: 20px;
-      min-width: 20px;
-      height: 20px;
+      width: 18px; min-width: 18px; height: 18px;
       background: var(--grad);
       border-radius: 50%;
-      margin-top: 1px;
+      margin-top: 2px;
+      flex-shrink: 0;
     }
 
     .tab-visual {
@@ -519,6 +570,15 @@
       max-width: 520px;
       border-radius: 18px;
       box-shadow: 0 32px 80px rgba(0,0,0,.4);
+    }
+    @media (max-width: 900px) {
+      .tab-panel.active { grid-template-columns: 1fr; }
+      .tab-visual { display: none; }
+    }
+    @media (max-width: 640px) {
+      .tabs-nav { gap: 4px; padding: 4px; margin-bottom: 36px; }
+      .tab-btn  { min-width: 96px; font-size: 11.5px; padding: 11px 10px; gap: 5px; }
+      .tab-btn .tab-icon { width: 14px; height: 14px; }
     }
 
     /* =========================================
@@ -581,7 +641,7 @@
     ========================================= */
     #cases {
       padding: 108px 0;
-      background: rgba(255,255,255,.02);
+      background: rgba(0,0,0,.03);
     }
     .cases-grid {
       display: grid;
@@ -593,7 +653,7 @@
       padding: 38px;
       border: 1px solid var(--border);
       border-radius: 22px;
-      background: rgba(255,255,255,.02);
+      background: rgba(0,0,0,.03);
       transition: border-color .25s, transform .25s;
       position: relative;
       overflow: hidden;
@@ -621,9 +681,11 @@
       width: auto;
       max-width: 140px;
       object-fit: contain;
-      filter: brightness(0) invert(1);
-      opacity: .75;
+      filter: brightness(0);
+      opacity: .5;
+      transition: opacity .3s;
     }
+    .case-card:hover .case-logo-wrap img { opacity: .85; }
     .case-name {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
@@ -758,7 +820,7 @@
        FOOTER
     ========================================= */
     footer {
-      background: rgba(0,0,0,.28);
+      background: rgba(0,0,0,.04);
       border-top: 1px solid var(--border);
       padding: 64px 0 38px;
     }
@@ -805,10 +867,6 @@
     /* =========================================
        RESPONSIVE
     ========================================= */
-    @media (max-width: 900px) {
-      .tab-panel.active { grid-template-columns: 1fr; }
-      .tab-visual { display: none; }
-    }
     @media (max-width: 768px) {
       .numeros-grid   { grid-template-columns: 1fr; }
       .problema-layout { grid-template-columns: 1fr; }
@@ -838,7 +896,7 @@
   <div class="hero-content">
     <span class="hero-pre">Produção de bares para eventos desde 2014</span>
     <h1 class="hero-h1">
-      Bar amador não é o que destrói<br>
+      Bar amador é o que destrói<br>
       <span class="grad-text">um bom evento.</span>
     </h1>
     <p class="hero-sub">
@@ -877,25 +935,25 @@
 <!-- ===================== LOGOS ===================== -->
 <section id="logos">
   <div class="container">
-    <p class="logos-label">Quem não aceita amadorismo escolheu a T2:</p>
-  </div>
-  <div class="logos-marquee">
-    <div class="logos-track">
-      <img src="Logo T2/redbull.png"   alt="Red Bull">
-      <img src="Logo T2/jack-d.png"    alt="Jack Daniel's">
-      <img src="Logo T2/heineken.png"  alt="Heineken">
-      <img src="Logo T2/csk.png"       alt="CajuSemKopo">
-      <img src="Logo T2/jaguariuna.png" alt="Jaguariuna">
-      <img src="Logo T2/ticomia.png"   alt="Ticomia">
-      <img src="Logo T2/castelli.png"  alt="Castelli">
-      <!-- duplicate for seamless loop -->
-      <img src="Logo T2/redbull.png"   alt="Red Bull">
-      <img src="Logo T2/jack-d.png"    alt="Jack Daniel's">
-      <img src="Logo T2/heineken.png"  alt="Heineken">
-      <img src="Logo T2/csk.png"       alt="CajuSemKopo">
-      <img src="Logo T2/jaguariuna.png" alt="Jaguariuna">
-      <img src="Logo T2/ticomia.png"   alt="Ticomia">
-      <img src="Logo T2/castelli.png"  alt="Castelli">
+    <header class="logos-header">
+      <h2 class="logos-title">Quem não aceita amadorismo<br>escolheu a <span>T2:</span></h2>
+      <p class="logos-subtitle">Marcas que confiam em padrão profissional nos seus eventos</p>
+    </header>
+    <div class="logos-grid">
+      <div class="logos-row logos-row--four">
+        <div class="logos-cell"><img src="Logo T2/redbull.png"   alt="Red Bull"></div>
+        <div class="logos-cell"><img src="Logo T2/jack-d.png"    alt="Jack Daniel's"></div>
+        <div class="logos-cell"><img src="Logo T2/heineken.png"  alt="Heineken"></div>
+        <div class="logos-cell"><img src="Logo T2/csk.png"       alt="CajuSemKopo"></div>
+      </div>
+      <div class="logos-row logos-row--three">
+        <div class="logos-cell"><img src="Logo T2/jaguariuna.png" alt="Jaguariuna"></div>
+        <div class="logos-cell"><img src="Logo T2/ticomia.png"   alt="Ticomia"></div>
+        <div class="logos-cell"><img src="Logo T2/castelli.png"  alt="Castelli"></div>
+      </div>
+    </div>
+    <div class="logos-cta">
+      <a href="#cases" class="logos-cta-btn">Ver cases de sucesso</a>
     </div>
   </div>
 </section>
@@ -949,6 +1007,7 @@
 <!-- ===================== PRODUTOS / SOLUÇÃO ===================== -->
 <section id="produtos">
   <div class="container">
+
     <div class="produtos-header">
       <span class="section-eyebrow">Solução</span>
       <h2 class="section-h2">Chega de torcer para o bar dar certo.</h2>
@@ -958,23 +1017,38 @@
       </p>
     </div>
 
-    <div class="tabs-nav">
-      <button class="tab-btn active" data-tab="uni">T2 UNI</button>
-      <button class="tab-btn" data-tab="corp">T2 CORP</button>
-      <button class="tab-btn" data-tab="festival">T2 FESTIVAL</button>
-      <button class="tab-btn" data-tab="ativa">T2 ATIVA</button>
-    </div>
+    <nav class="tabs-nav" role="tablist" aria-label="Soluções T2">
+      <button class="tab-btn active" data-tab="uni" role="tab" aria-selected="true" aria-controls="tab-uni">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        T2 UNI
+      </button>
+      <button class="tab-btn" data-tab="corp" role="tab" aria-selected="false" aria-controls="tab-corp">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        T2 CORP
+      </button>
+      <button class="tab-btn" data-tab="festival" role="tab" aria-selected="false" aria-controls="tab-festival">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        T2 FESTIVAL
+      </button>
+      <button class="tab-btn" data-tab="ativa" role="tab" aria-selected="false" aria-controls="tab-ativa">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        T2 ATIVA
+      </button>
+      <button class="tab-btn" data-tab="forma" role="tab" aria-selected="false" aria-controls="tab-forma">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        T2 FORMA
+      </button>
+    </nav>
 
     <!-- T2 UNI -->
-    <div class="tab-panel active" id="tab-uni">
+    <div class="tab-panel active" id="tab-uni" role="tabpanel">
       <div class="tab-text">
         <span class="tab-eyebrow">Para atléticas universitárias</span>
         <h3 class="tab-h3">Atlética boa tem bar que funciona. Não um bar que se vira.</h3>
         <p class="tab-body">
           Alto volume, público intenso, margem curta para erro. Empresa de bico não sobrevive a esse cenário.
           A T2 entra com equipe dimensionada para o pico de consumo, quantificação baseada em histórico real
-          e staff que não desaparece no dia.<br><br>
-          <strong>A galera bebe. Você não apaga incêndio.</strong>
+          e staff que não desaparece no dia. A galera bebe. Você não apaga incêndio.
         </p>
         <ul class="tab-bullets">
           <li>1 profissional para cada 70 convidados em open bar</li>
@@ -989,15 +1063,15 @@
     </div>
 
     <!-- T2 CORP -->
-    <div class="tab-panel" id="tab-corp">
+    <div class="tab-panel" id="tab-corp" role="tabpanel">
       <div class="tab-text">
         <span class="tab-eyebrow">Para empresas e agências de live marketing</span>
         <h3 class="tab-h3">Sua marca não pode ser representada por quem improvisa.</h3>
         <p class="tab-body">
           Evento corporativo exige postura, alinhamento e zero improviso. Fornecedor genérico não entende
           isso — entrega operação, não experiência. A T2 seleciona e treina profissionais para que cada
-          drink servido reforce a identidade da marca, não comprometa ela.<br><br>
-          <strong>Red Bull e Jack Daniel's já fizeram essa escolha.</strong>
+          drink servido reforce a identidade da marca, não comprometa ela.
+          Red Bull e Jack Daniel's já fizeram essa escolha.
         </p>
         <ul class="tab-bullets">
           <li>Curadoria técnica e comportamental do staff por perfil de marca</li>
@@ -1012,15 +1086,15 @@
     </div>
 
     <!-- T2 FESTIVAL -->
-    <div class="tab-panel" id="tab-festival">
+    <div class="tab-panel" id="tab-festival" role="tabpanel">
       <div class="tab-text">
         <span class="tab-eyebrow">Para produtoras e festivais de grande porte</span>
         <h3 class="tab-h3">Festival de múltiplos dias não perdoa quem não tem histórico.</h3>
         <p class="tab-body">
           Uma falha no bar em escala de festival não é um problema operacional — é um problema de imagem,
-          de receita e da próxima edição. Quem não tem dado, chuta. A T2 tem 13 anos de histórico de consumo
-          para dimensionar cada detalhe antes de o primeiro convidado entrar.<br><br>
-          <strong>Você escala o festival. Nós escalamos junto — sem achismo.</strong>
+          de receita e da próxima edição. Quem não tem dado, chuta. A T2 tem 13 anos de histórico de
+          consumo para dimensionar cada detalhe antes de o primeiro convidado entrar.
+          Você escala o festival. Nós escalamos junto — sem achismo.
         </p>
         <ul class="tab-bullets">
           <li>Precisão absoluta na quantificação: sem falta, sem desperdício</li>
@@ -1035,15 +1109,15 @@
     </div>
 
     <!-- T2 ATIVA -->
-    <div class="tab-panel" id="tab-ativa">
+    <div class="tab-panel" id="tab-ativa" role="tabpanel">
       <div class="tab-text">
         <span class="tab-eyebrow">Para marcas e agências de live marketing</span>
         <h3 class="tab-h3">Presença de marca no evento não é banner. É experiência — ou não é nada.</h3>
         <p class="tab-body">
-          Muita marca aparece no evento. Poucas são lembradas depois. A T2 Ativa entrega conexão —
-          com staff selecionado por perfil de marca, treinado para personificar o que ela representa
-          e capaz de transformar cada interação num momento que fica.<br><br>
-          <strong>Fizemos isso com Red Bull. Fizemos com Jack Daniel's.</strong>
+          Muita marca aparece no evento. Poucas são lembradas depois. A T2 Ativa entrega conexão — com
+          staff selecionado por perfil de marca, treinado para personificar o que ela representa e capaz
+          de transformar cada interação num momento que fica.
+          Fizemos isso com Red Bull. Fizemos com Jack Daniel's.
         </p>
         <ul class="tab-bullets">
           <li>Curadoria comportamental do staff por fit com os valores da marca</li>
@@ -1051,6 +1125,21 @@
           <li>Relatório de ativação pós-evento com dados de interação e alcance</li>
         </ul>
         <a href="#cta-final" class="btn-primary">Solicitar orçamento para minha ativação →</a>
+      </div>
+      <div class="tab-visual">
+        <img src="Elementos T2/Componente-produtos.png" alt="T2 Produtos">
+      </div>
+    </div>
+
+    <!-- T2 FORMA -->
+    <div class="tab-panel" id="tab-forma" role="tabpanel">
+      <div class="tab-text">
+        <span class="tab-eyebrow">Em breve</span>
+        <h3 class="tab-h3">Uma nova solução T2 está chegando.</h3>
+        <p class="tab-body">
+          Estamos desenvolvendo mais uma forma de servir com excelência. Em breve.
+        </p>
+        <a href="#cta-final" class="btn-primary">Quero saber quando lançar →</a>
       </div>
       <div class="tab-visual">
         <img src="Elementos T2/Componente-produtos.png" alt="T2 Produtos">
